@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../hooks';
 import { clear, evaluate, inputDigit } from '../features/calculatorSlice';
+import React from 'react';
 
 
 const buttons = [
@@ -21,6 +22,23 @@ const Calculator = () => {
         else if (value === "C") dispatch(clear());
         else dispatch(inputDigit(value));
     };
+
+    React.useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            const { key } = event;
+
+            if (/\d/.test(key) || ["+", "-", "*", "/", "."].includes(key)) {
+                dispatch(inputDigit(key));
+            } else if (key === "Enter" || key === "=") {
+                dispatch(evaluate());
+            } else if (key === "c" || key === "C") {
+                dispatch(clear());
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [dispatch]);
 
     return (
         <div className="calculator">
