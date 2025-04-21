@@ -8,7 +8,7 @@ export function evaluateExpression(expression: string): string {
         }
         // eslint-disable-next-line no-eval
         return eval(sanitized).toString();
-    }
+    } 
     catch {
         return "Error";
     }
