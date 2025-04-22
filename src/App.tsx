@@ -5,6 +5,7 @@ function App() {
 
   return (
     <>
+      {console.group("Calculator App Initialized!")}
       <Calculator />
     </>
   )

@@ -17,6 +17,7 @@ const Calculator = () => {
     const { expression, result } = useAppSelector((state) => state.calculator);
 
     const handleClick = (value: string) => {
+        console.log("User Clicked");
         if (value === "=") dispatch(evaluate());
         else if (value === "C") dispatch(clear());
         else if (value === "⌫") dispatch(backspace());

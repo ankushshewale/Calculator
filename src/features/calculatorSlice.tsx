@@ -12,12 +12,18 @@ const calculatorSlice = createSlice({
     initialState,
     reducers: {
         inputDigit: (state, action: PayloadAction<string>) => {
+
             const value = action.payload;
             const lastChar = state.expression.slice(-1);
             const operators = ["+", "-", "*", "/", "."];
-
+            
+            console.groupCollapsed("Input Digit Reducer");
+            console.log("state.expression Before: ", state.expression);
+            console.log("value: ", value);
+            console.log("lastChar: ", lastChar);
             // Prevent multiple operators in a row
             if (operators.includes(value) && operators.includes(lastChar)) {
+                console.log("Prevent multiple operators in a row: ", operators.includes(value) && operators.includes(lastChar));
                 return; // Do nothing if last and current are both operators
             }
 
@@ -27,12 +33,20 @@ const calculatorSlice = createSlice({
             }
 
             state.expression += value;
+            
+            console.log("state.expression After: ", state.expression);
+            console.groupEnd();
+
         },
         clear: (state) => {
+            console.log("Clear Reducer");
             state.expression = "";
             state.result = "0";
         },
         evaluate: (state) => {
+            console.groupCollapsed("Evaluate Reducer");
+            console.log("state.result ", state.result);
+            console.groupEnd();
             try {
                 state.result = evaluateExpression(state.expression);
             } catch {
@@ -40,6 +54,7 @@ const calculatorSlice = createSlice({
             }
         },
         backspace: (state) => {
+            console.log("Backspace Reducer");
             state.expression = state.expression.slice(0, -1);
         }
     }
