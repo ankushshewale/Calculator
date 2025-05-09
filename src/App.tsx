@@ -6,6 +6,7 @@ function App() {
   return (
     <>
       {console.group("Calculator App Initialized!")}
+      <h1>Calculator</h1>
       <Calculator />
     </>
   )
